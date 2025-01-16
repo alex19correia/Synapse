@@ -1,0 +1,35 @@
+{
+  "title": "RAG System Metrics",
+  "panels": [
+    {
+      "title": "Query Response Time",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "rate(rag_query_time_ms_sum[5m]) / rate(rag_query_time_ms_count[5m])",
+          "legendFormat": "Avg Query Time"
+        }
+      ]
+    },
+    {
+      "title": "Cache Hit Rate",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "sum(rate(rag_cache_hits_total[5m])) / sum(rate(rag_queries_total[5m]))",
+          "legendFormat": "Cache Hit %"
+        }
+      ]
+    },
+    {
+      "title": "Average Similarity Score",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "avg_over_time(rag_similarity_score[5m])",
+          "legendFormat": "Avg Similarity"
+        }
+      ]
+    }
+  ]
+} 

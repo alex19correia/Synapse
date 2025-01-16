@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daily Report</title>
+</head>
+<body>
+    <h1>Daily Report - {{ date }}</h1>
+    
+    <h2>Metrics Summary</h2>
+    <ul>
+        {% for key, value in metrics.items() %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html> 

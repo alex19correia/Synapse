@@ -1,0 +1,167 @@
+# Development Assistant Configuration
+
+# 1. Documentation and Context Management
+documentation_config = {
+    "pre_response_checks": {
+        "priority_docs": [
+            "docs/architecture/*",  # System architecture and core components
+            "docs/api/*",          # API specifications and endpoints
+            "docs/development/*",   # Development guidelines
+            "docs/llm/*",          # LLM patterns and configurations
+            "src/**/*.md"          # Inline documentation
+        ],
+        "reference_docs": {
+            "core_systems": [
+                "analytics-system.md",
+                "api-system.md",
+                "auth-system.md",
+                "llm-system.md",
+                "memory-system.md"
+            ],
+            "infrastructure": [
+                "deployment-system.md",
+                "infrastructure-system.md",
+                "monitoring-system.md"
+            ],
+            "quality": [
+                "security-system.md",
+                "testing-system.md"
+            ]
+        },
+        "verification_steps": [
+            "Check relevant architecture docs",
+            "Review related system documentation",
+            "Cross-reference with existing implementations",
+            "Verify current best practices",
+            "Validate against project guidelines"
+        ]
+    },
+    "context_validation": {
+        "project_context": True,    # Current project state
+        "historical_context": True, # Previous related discussions
+        "technical_context": True,  # Technical requirements
+        "cross_references": True    # Related documentation
+    }
+}
+
+# 2. Response Protocol
+response_protocol = {
+    "pre_response_workflow": [
+        "1. Review all relevant documentation in priority order",
+        "2. Check existing implementations and patterns",
+        "3. Validate against current best practices",
+        "4. Consider cross-system implications",
+        "5. Verify security and quality guidelines"
+    ],
+    "documentation_requirements": {
+        "must_reference": {
+            "architecture_docs": True,
+            "system_specs": True,
+            "related_patterns": True
+        },
+        "must_include": {
+            "relevant_examples": True,
+            "code_patterns": True,
+            "security_considerations": True
+        }
+    },
+    "response_structure": {
+        "format": "markdown",
+        "sections": [
+            "Context summary",
+            "Documentation references",
+            "Technical solution",
+            "Implementation examples",
+            "Related considerations"
+        ]
+    }
+}
+
+# 3. Technical Implementation Guidelines
+technical_guidelines = {
+    "code_standards": {
+        "python": {
+            "style": "PEP 8",
+            "type_hints": True,
+            "docstrings": "Google style",
+            "test_coverage": ">= 90%"
+        },
+        "typescript": {
+            "strict": True,
+            "eslint": "Airbnb",
+            "tests": "Jest + RTL"
+        }
+    },
+    "architecture_patterns": {
+        "required": [
+            "Clean Architecture",
+            "SOLID principles", 
+            "DRY/KISS",
+            "RAG patterns"
+        ],
+        "documentation": "Must reference architecture/*.md"
+    }
+}
+
+# 4. Response Types and Validation
+response_types = {
+    "code_review": {
+        "required_checks": [
+            "docs/development/guidelines.md",
+            "docs/architecture/relevant-system.md",
+            "existing implementations"
+        ],
+        "output_format": "Focused code blocks with comments"
+    },
+    "architecture": {
+        "required_checks": [
+            "docs/architecture/*.md",
+            "docs/llm/patterns.md",
+            "current implementations"
+        ],
+        "output_format": "System diagrams + implementation guide"
+    },
+    "debugging": {
+        "required_checks": [
+            "docs/runbooks/*",
+            "monitoring-system.md",
+            "error patterns"
+        ],
+        "output_format": "Step-by-step troubleshooting"
+    }
+}
+
+# 5. Core System References
+system_references = {
+    "always_check": {
+        "llm": ["llm-system.md", "llm/patterns.md", "llm/models/*.md"],
+        "api": ["api-system.md", "api-design.md"],
+        "security": ["security-system.md", "auth-system.md"],
+        "monitoring": ["monitoring-system.md", "logging-system.md"]
+    },
+    "cross_reference": {
+        "method": "Follow architecture/README.md links",
+        "depth": "2 levels deep minimum",
+        "validation": "Check for recent updates"
+    }
+}
+
+# 6. Quality Control
+quality_control = {
+    "pre_response": {
+        "doc_verification": True,
+        "pattern_validation": True,
+        "security_check": True
+    },
+    "response_format": {
+        "clear_sections": True,
+        "code_examples": True,
+        "doc_references": True
+    },
+    "follow_up": {
+        "verify_understanding": True,
+        "suggest_improvements": True
+    }
+}
+
+

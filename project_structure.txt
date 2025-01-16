@@ -1,0 +1,635 @@
+🚀 /
+│   ├── ⚙️ config/
+│   │   ├── 📁 grafana/
+│   │   │   ├── 📁 dashboards/
+│   │   │   ├── 📋 api_performance.json
+│   │   │   └── 📋 rag_metrics.json
+│   │   │   ├── 📁 provisioning/
+│   │   │   │   ├── 📁 alerting/
+│   │   │   │   └── ⚙️ api_alerts.yml
+│   │   │   │   ├── 📁 dashboards/
+│   │   │   │   ├── ⚙️ default.yaml
+│   │   │   │   └── ⚙️ default.yml
+│   │   │   │   ├── 📁 datasources/
+│   │   │   │   └── ⚙️ prometheus.yml
+│   │   │       ├── 📁 plugins/
+│   │   └── 📄 grafana.ini
+│       ├── 📁 prometheus/
+│       │   ├── 📁 rules/
+│       │   └── ⚙️ api_alerts.yml
+│       └── ⚙️ prometheus.yml
+│   ├── 📁 data/
+│       ├── 📁 user/
+│       └── 📋 profile.json
+│   ├── 📁 deploy/
+│       ├── 📁 grafana/
+│       │   ├── 📁 alerts/
+│       │   └── ⚙️ synapse-alerts.yaml
+│           ├── 📁 dashboards/
+│           ├── ⚙️ synapse-business.yaml
+│           └── ⚙️ synapse-metrics.yaml
+│   ├── 📚 docs/
+│   │   ├── 📁 agents/
+│   │   ├── 📝 github_assistant.md
+│   │   └── 📝 web_researcher.md
+│   │   ├── 📁 architecture/
+│   │   ├── 📝 agent-system.md
+│   │   ├── 📝 analytics-system.md
+│   │   ├── 📝 api-design.md
+│   │   ├── 📝 api-system.md
+│   │   ├── 📝 auth-system.md
+│   │   ├── 📝 backup-system.md
+│   │   ├── 📝 cache-system.md
+│   │   ├── 📝 cicd-system.md
+│   │   ├── 📝 data-system.md
+│   │   ├── 📝 deployment-system.md
+│   │   ├── 📝 infrastructure-system.md
+│   │   ├── 📝 llm-strategy.md
+│   │   ├── 📝 llm-system.md
+│   │   ├── 📝 logging-system.md
+│   │   ├── 📝 memory-system.md
+│   │   ├── 📝 metrics-system.md
+│   │   ├── 📝 ml-system.md
+│   │   ├── 📝 monitoring-system.md
+│   │   ├── 📝 orchestration.md
+│   │   ├── 📝 plugin-system.md
+│   │   ├── 📝 README.md
+│   │   ├── 📝 security-system.md
+│   │   ├── 📝 testing-system.md
+│   │   ├── 📝 ui-system.md
+│   │   ├── 📝 websocket-system.md
+│   │   └── 📝 workflow-system.md
+│   │   ├── 📁 development/
+│   │   ├── 📝 api.md
+│   │   ├── 📝 guidelines.md
+│   │   ├── 📝 plugins.md
+│   │   └── 📝 setup.md
+│   │   ├── 📁 llm/
+│   │   │   ├── 📁 context/
+│   │   │   ├── 📝 architecture.md
+│   │   │   └── 📝 technical_stack.md
+│   │   │   ├── 📁 frameworks/
+│   │   │   │   ├── 📁 fastapi/
+│   │   │   │   ├── 📝 current_version.md
+│   │   │   │   ├── 📝 custom_patterns.md
+│   │   │   │   └── 📝 dependencies.md
+│   │   │   │   ├── 📁 langchain/
+│   │   │   │   ├── 📁 pydantic/
+│   │   │   │   ├── 📝 config_patterns.md
+│   │   │   │   ├── 📝 v2_features.md
+│   │   │   │   └── 📝 validation.md
+│   │   │       ├── 📁 supabase/
+│   │   │       ├── 📝 queries.md
+│   │   │       └── 📝 setup.md
+│   │   │   ├── 📁 models/
+│   │   │   ├── 📝 data_models.md
+│   │   │   └── 📝 llm_patterns.md
+│   │   ├── 📝 assistants-api.md
+│   │   ├── 📝 chat-integration.md
+│   │   └── 📝 README.md
+│   │   ├── 📁 runbooks/
+│   │   ├── 📝 common-procedures.md
+│   │   ├── 📝 disaster-recovery.md
+│   │   ├── 📝 README.md
+│   │   └── 📝 troubleshooting-guide.md
+│   │   ├── 📁 setup/
+│   │   ├── 📝 environment.md
+│   │   └── 📝 setup_instructions.md
+│   │   ├── 📁 testing/
+│   │   ├── 📝 e2e-tests.md
+│   │   ├── 📝 e2e.md
+│   │   ├── 📝 integration-tests.md
+│   │   ├── 📝 middleware-tests.md
+│   │   ├── 📝 README.md
+│   │   ├── 📝 TESTING.md
+│   │   ├── 📝 unit-tests.md
+│   │   └── 📝 unit.md
+│   │   ├── 📁 user_guide/
+│   ├── 📝 CHANGELOG.md
+│   ├── 📝 CONTRIBUTING.md
+│   └── 📝 README.md
+│   ├── 📁 exports/
+│   ├── 📁 github/
+│       ├── 📁 workflows/
+│       ├── ⚙️ deploy.yml
+│       └── ⚙️ main.yml
+│   ├── 📁 instructions/
+│   │   ├── 📁 auth/
+│   │   └── 📝 README.md
+│   ├── 📝 ai_tech_stack.md
+│   ├── 📝 instructions.md
+│   ├── 📄 instruções_bolt
+│   ├── 📄 instruções_lovable
+│   └── 📝 todolist.md
+│   ├── 📁 k8s/
+│       ├── 📁 production/
+│       └── ⚙️ deployment.yml
+│   ├── 📁 requirements/
+│   ├── 📄 analytics.txt
+│   ├── 📄 base.txt
+│   ├── 📄 cli.txt
+│   ├── 📄 dev.txt
+│   └── 📄 prod.txt
+│   ├── 📁 scripts/
+│   ├── 📄 check_services.sh
+│   ├── 📘 lovable-build.ts
+│   ├── 📘 lovable-protection.ts
+│   ├── 📘 lovable-verify.ts
+│   ├── 🐍 maintain.py
+│   ├── 🐍 run_tests.py
+│   ├── 🐍 setup.py
+│   ├── 📄 test_analytics.bat
+│   ├── 📄 test_analytics.sh
+│   ├── 🐍 test_brave_api.py
+│   ├── 🐍 update_docs.py
+│   └── 🐍 validate_docs.py
+│   ├── 🔧 src/
+│   │   ├── 📁 agents/
+│   │   │   ├── 📁 tech_stack_expert/
+│   │   │   ├── 🐍 agent.py
+│   │   │   ├── 🐍 models.py
+│   │   │   └── 🐍 prompts.py
+│   │   │   ├── 📁 web_researcher/
+│   │   │   ├── 🐍 agent.py
+│   │   │   └── 🐍 config.py
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 base_agent.py
+│   │   ├── 🐍 github_assistant.py
+│   │   └── 🐍 system.py
+│   │   ├── 📁 analytics/
+│   │   │   ├── 📁 dashboards/
+│   │   │   └── 🐍 initial_setup.py
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 alerts.py
+│   │   ├── 🐍 analytics_service.py
+│   │   ├── 🐍 business_metrics.py
+│   │   ├── 🐍 exporters.py
+│   │   ├── 🐍 metrics.py
+│   │   ├── 🐍 reports.py
+│   │   └── 🐍 visualizations.py
+│   │   ├── 🌐 api/
+│   │   │   ├── 📁 middleware/
+│   │   │   └── 🐍 metrics.py
+│   │   │   ├── 📁 routes/
+│   │   │   ├── 🐍 __init__.py
+│   │   │   └── 🐍 chat.py
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 dependencies.py
+│   │   ├── 🐍 main.py
+│   │   ├── 🐍 metrics.py
+│   │   ├── 🐍 middleware.py
+│   │   ├── 🐍 routes.py
+│   │   └── 🐍 schemas.py
+│   │   ├── 📁 app/
+│   │   │   ├── 📁 (lovable)/
+│   │   │   │   ├── 📁 chat/
+│   │   │   │       ├── 📁 [sessionId]/
+│   │   │   │       └── ⚛️ page.tsx
+│   │   │   └── ⚛️ layout.tsx
+│   │   │   ├── 🌐 api/
+│   │   │   │   ├── 📁 auth/
+│   │   │   │   │   ├── 📁 [...clerk]/
+│   │   │   │       ├── 📁 mfa/
+│   │   │   │           ├── 📁 status/
+│   │   │   │           └── 📘 route.ts
+│   │   │   │   ├── 📁 backup/
+│   │   │   │   └── 📘 route.ts
+│   │   │   │   ├── 📁 chat/
+│   │   │   │   │   ├── 📁 [sessionId]/
+│   │   │   │   │   │   ├── 📁 messages/
+│   │   │   │   │   │   └── 📘 route.ts
+│   │   │   │   │   └── 📘 route.ts
+│   │   │   │   │   ├── 📁 message/
+│   │   │   │   │   └── 📘 route.ts
+│   │   │   │   │   ├── 📁 session/
+│   │   │   │   │   └── 📘 route.ts
+│   │   │   │   │   ├── 📁 sessions/
+│   │   │   │   │   │   ├── 📁 [sessionId]/
+│   │   │   │   │   │   └── 📘 route.ts
+│   │   │   │   │   └── 📘 route.ts
+│   │   │   │   └── 📘 route.ts
+│   │   │   │   ├── 📁 debug/
+│   │   │   │       ├── 📁 session/
+│   │   │   │       └── 📘 route.ts
+│   │   │   │   ├── 📁 security/
+│   │   │   │   └── 📘 route.ts
+│   │   │   │   ├── 📁 sessions/
+│   │   │   │   │   ├── 📁 [sessionId]/
+│   │   │   │   │   │   ├── 📁 messages/
+│   │   │   │   │   │   └── 📘 route.ts
+│   │   │   │   │   └── 📘 route.ts
+│   │   │   │   └── 📘 route.ts
+│   │   │       ├── 📁 workflows/
+│   │   │       └── 📘 route.ts
+│   │   │   ├── 📁 chat/
+│   │   │   └── ⚛️ page.tsx
+│   │   │   ├── 🧩 components/
+│   │   │   │   ├── 📁 Backup/
+│   │   │   │   ├── ⚛️ BackupList.tsx
+│   │   │   │   ├── ⚛️ BackupManager.tsx
+│   │   │   │   ├── ⚛️ CreateBackup.tsx
+│   │   │   │   └── ⚛️ RestoreBackup.tsx
+│   │   │   │   ├── 📁 Charts/
+│   │   │   │   ├── ⚛️ index.tsx
+│   │   │   │   └── ⚛️ MetricsChart.tsx
+│   │   │   │   ├── 📁 Dashboard/
+│   │   │   │   ├── ⚛️ AgentMetrics.tsx
+│   │   │   │   ├── ⚛️ AgentPerformance.tsx
+│   │   │   │   └── ⚛️ ImprovementSuggestions.tsx
+│   │   │   │   ├── 📁 Feedback/
+│   │   │   │   ├── ⚛️ AgentFeedback.tsx
+│   │   │   │   ├── ⚛️ FeedbackForm.tsx
+│   │   │   │   └── ⚛️ Rating.tsx
+│   │   │   │   ├── 📁 Onboarding/
+│   │   │   │   ├── ⚛️ OnboardingFlow.tsx
+│   │   │   │   ├── ⚛️ Progress.tsx
+│   │   │   │   └── ⚛️ Step.tsx
+│   │   │   │   ├── 📁 Tutorial/
+│   │   │   │   ├── ⚛️ CodeEditor.tsx
+│   │   │   │   ├── ⚛️ InteractiveTutorial.tsx
+│   │   │   │   └── ⚛️ TutorialStep.tsx
+│   │   │       ├── 📁 WorkflowManager/
+│   │   │       ├── ⚛️ AgentSelector.tsx
+│   │   │       ├── ⚛️ index.tsx
+│   │   │       ├── ⚛️ WorkflowCanvas.tsx
+│   │   │       └── ⚛️ WorkflowControls.tsx
+│   │   │   ├── 📁 dashboard/
+│   │   │   └── ⚛️ page.tsx
+│   │   │   ├── 📁 debug/
+│   │   │       ├── 📁 token/
+│   │   │       └── ⚛️ page.tsx
+│   │   │   ├── 🎣 hooks/
+│   │   │   ├── 📘 useAnalytics.ts
+│   │   │   ├── 📘 useBackups.ts
+│   │   │   ├── 📘 useFeedbackSystem.ts
+│   │   │   ├── 📘 useOnboarding.ts
+│   │   │   ├── 📘 useTutorial.ts
+│   │   │   └── 📘 useWorkflowState.ts
+│   │   │   ├── 📁 login/
+│   │   │   └── ⚛️ page.tsx
+│   │   │   ├── 📁 sign-in/
+│   │   │       ├── 📁 [[...sign-in]]/
+│   │   │       └── ⚛️ page.tsx
+│   │   │   ├── 📁 sign-up/
+│   │   │       ├── 📁 [[...sign-up]]/
+│   │   │       └── ⚛️ page.tsx
+│   │   │   ├── 📁 signup/
+│   │   │   └── ⚛️ page.tsx
+│   │   ├── ⚛️ error.tsx
+│   │   ├── 📄 globals.css
+│   │   ├── ⚛️ layout.tsx
+│   │   ├── ⚛️ loading.tsx
+│   │   ├── 📘 metadata.ts
+│   │   ├── ⚛️ not-found.tsx
+│   │   ├── ⚛️ page.tsx
+│   │   └── ⚛️ providers.tsx
+│   │   ├── 📁 auth/
+│   │   └── 🐍 clerk.py
+│   │   ├── 📁 cache/
+│   │   └── 🐍 redis_cache.py
+│   │   ├── 📁 cli/
+│   │   └── 🐍 main.py
+│   │   ├── 🧩 components/
+│   │   │   ├── 📁 auth/
+│   │   │   ├── ⚛️ SignIn.tsx
+│   │   │   └── ⚛️ SignUp.tsx
+│   │   │   ├── 📁 Charts/
+│   │   │   ├── ⚛️ index.tsx
+│   │   │   └── ⚛️ MetricsChart.tsx
+│   │   │   ├── 📁 Chat/
+│   │   │   ├── ⚛️ ChatHeader.tsx
+│   │   │   ├── ⚛️ ChatInput.tsx
+│   │   │   ├── ⚛️ ChatLayout.tsx
+│   │   │   ├── ⚛️ ChatWindow.tsx
+│   │   │   ├── ⚛️ ConversationList.tsx
+│   │   │   ├── ⚛️ MessageList.tsx
+│   │   │   ├── ⚛️ SessionList.tsx
+│   │   │   └── ⚛️ UserSettings.tsx
+│   │   │   ├── 📁 lovable/
+│   │   │   ├── ⚛️ ChatWindow.tsx
+│   │   │   ├── ⚛️ SessionList.tsx
+│   │   │   └── ⚛️ test.tsx
+│   │       ├── 📁 ui/
+│   │       ├── ⚛️ accordion.tsx
+│   │       ├── ⚛️ alert-dialog.tsx
+│   │       ├── ⚛️ alert.tsx
+│   │       ├── ⚛️ aspect-ratio.tsx
+│   │       ├── ⚛️ avatar.tsx
+│   │       ├── ⚛️ badge.tsx
+│   │       ├── ⚛️ breadcrumb.tsx
+│   │       ├── ⚛️ button.tsx
+│   │       ├── ⚛️ calendar.tsx
+│   │       ├── ⚛️ card.tsx
+│   │       ├── ⚛️ carousel.tsx
+│   │       ├── ⚛️ chart.tsx
+│   │       ├── ⚛️ checkbox.tsx
+│   │       ├── ⚛️ collapsible.tsx
+│   │       ├── ⚛️ command.tsx
+│   │       ├── ⚛️ context-menu.tsx
+│   │       ├── ⚛️ date-range-picker.tsx
+│   │       ├── ⚛️ dialog.tsx
+│   │       ├── ⚛️ drawer.tsx
+│   │       ├── ⚛️ dropdown-menu.tsx
+│   │       ├── ⚛️ form.tsx
+│   │       ├── ⚛️ hover-card.tsx
+│   │       ├── ⚛️ input-otp.tsx
+│   │       ├── ⚛️ input.tsx
+│   │       ├── ⚛️ label.tsx
+│   │       ├── ⚛️ menubar.tsx
+│   │       ├── ⚛️ navigation-menu.tsx
+│   │       ├── ⚛️ pagination.tsx
+│   │       ├── ⚛️ popover.tsx
+│   │       ├── ⚛️ progress.tsx
+│   │       ├── ⚛️ radio-group.tsx
+│   │       ├── ⚛️ resizable.tsx
+│   │       ├── ⚛️ scroll-area.tsx
+│   │       ├── ⚛️ select.tsx
+│   │       ├── ⚛️ separator.tsx
+│   │       ├── ⚛️ sheet.tsx
+│   │       ├── ⚛️ sidebar.tsx
+│   │       ├── ⚛️ skeleton.tsx
+│   │       ├── ⚛️ slider.tsx
+│   │       ├── ⚛️ sonner.tsx
+│   │       ├── ⚛️ switch.tsx
+│   │       ├── ⚛️ table.tsx
+│   │       ├── ⚛️ tabs.tsx
+│   │       ├── ⚛️ textarea.tsx
+│   │       ├── ⚛️ toast.tsx
+│   │       ├── ⚛️ toaster.tsx
+│   │       ├── ⚛️ toggle-group.tsx
+│   │       ├── ⚛️ toggle.tsx
+│   │       ├── ⚛️ tooltip.tsx
+│   │       └── 📘 use-toast.ts
+│   │   ├── ⚙️ config/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 cache.py
+│   │   ├── 📘 clerk.ts
+│   │   ├── 📘 env.ts
+│   │   ├── 🐍 environment.py
+│   │   ├── 🐍 llm_config.py
+│   │   ├── 📘 protected-paths.ts
+│   │   ├── 🐍 settings.py
+│   │   └── 🐍 supabase_config.py
+│   │   ├── 📁 contexts/
+│   │   └── ⚛️ auth-context.tsx
+│   │   ├── ⚛️ core/
+│   │   │   ├── 📁 analytics/
+│   │   │   └── 🐍 system.py
+│   │   │   ├── 📁 backup/
+│   │   │   └── 🐍 system.py
+│   │   │   ├── 📁 discovery/
+│   │   │   └── 🐍 agent_discovery.py
+│   │   │   ├── 📁 examples/
+│   │   │   └── 🐍 manager.py
+│   │   │   ├── 📁 factory/
+│   │   │   └── 🐍 agent_factory.py
+│   │   │   ├── 📁 learning/
+│   │   │   └── 🐍 agent_improver.py
+│   │   │   ├── 📁 memory/
+│   │   │   └── 🐍 integration.py
+│   │   │   ├── 📁 monitoring/
+│   │   │   ├── 🐍 agent_metrics.py
+│   │   │   ├── 🐍 health.py
+│   │   │   ├── 🐍 integration.py
+│   │   │   └── 🐍 logger.py
+│   │   │   ├── 📁 quality/
+│   │   │   └── 🐍 monitor.py
+│   │   │   ├── 📁 registry/
+│   │   │   └── 🐍 agent_registry.py
+│   │   │   ├── 📁 router/
+│   │   │   └── 🐍 engine.py
+│   │   │   ├── 📁 security/
+│   │   │   ├── 🐍 audit.py
+│   │   │   └── 🐍 permissions.py
+│   │   │   ├── 📁 templates/
+│   │   │   └── 🐍 base_agent.py
+│   │   ├── 🐍 base_agent.py
+│   │   ├── 🐍 cache.py
+│   │   ├── 🐍 llm.py
+│   │   ├── 🐍 memory.py
+│   │   ├── 🐍 models.py
+│   │   ├── 🐍 orchestrator.py
+│   │   ├── 🐍 retrieval.py
+│   │   ├── 🐍 router.py
+│   │   └── 🐍 tools.py
+│   │   ├── 🎣 hooks/
+│   │   ├── ⚛️ use-mobile.tsx
+│   │   ├── ⚛️ use-theme.tsx
+│   │   ├── 📘 use-toast.ts
+│   │   ├── 📘 useAnalytics.ts
+│   │   ├── 📘 useBackups.ts
+│   │   ├── 📘 useBufferedData.ts
+│   │   ├── 📘 useChat.ts
+│   │   ├── 📘 useFeedbackSystem.ts
+│   │   ├── 📘 useOnboarding.ts
+│   │   └── 📘 useSessions.ts
+│   │   ├── 📁 lib/
+│   │   │   ├── 📁 assistants/
+│   │   │   ├── 📘 client.ts
+│   │   │   ├── 📘 config.ts
+│   │   │   ├── 📘 example.ts
+│   │   │   └── 📘 types.ts
+│   │   │   ├── 📁 db/
+│   │   │   ├── 📁 llm/
+│   │   │       ├── 📁 providers/
+│   │   │       ├── 📘 anthropic.ts
+│   │   │       ├── 📘 index.ts
+│   │   │       ├── 📘 llm-factory.ts
+│   │   │       ├── 📘 openai.ts
+│   │   │       └── 📘 types.ts
+│   │   ├── 📘 api.ts
+│   │   ├── 📘 auth.ts
+│   │   ├── 📘 buffer.ts
+│   │   ├── 📘 config.ts
+│   │   ├── 📘 db.ts
+│   │   ├── 📘 openai.ts
+│   │   ├── 📘 security.ts
+│   │   ├── 📘 supabase.ts
+│   │   └── 📘 utils.ts
+│   │   ├── 📁 llm/
+│   │   ├── 🐍 llm_service.py
+│   │   └── 🐍 prompts.py
+│   │   ├── 📁 memory/
+│   │   ├── 🐍 embeddings.py
+│   │   ├── 🐍 memory.py
+│   │   └── 🐍 rag.py
+│   │   ├── 📁 middleware/
+│   │   ├── 📘 buffer.ts
+│   │   ├── 🐍 metrics_middleware.py
+│   │   └── 🐍 rate_limiter.py
+│   │   ├── 📁 models/
+│   │   ├── 🐍 chat.py
+│   │   ├── 🐍 goal.py
+│   │   ├── 🐍 llm_factory.py
+│   │   ├── 🐍 llm_interaction.py
+│   │   ├── 🐍 message.py
+│   │   ├── 🐍 task.py
+│   │   └── 🐍 user.py
+│   │   ├── 📁 pages/
+│   │   ├── ⚛️ _app.tsx
+│   │   └── ⚛️ _document.tsx
+│   │   ├── 📁 router/
+│   │   └── 🐍 agent_router.py
+│   │   ├── 📁 routes/
+│   │   ├── 🐍 agents.py
+│   │   └── 🐍 web_researcher.py
+│   │   ├── 📁 scripts/
+│   │   ├── 📘 test-assistant.ts
+│   │   ├── 📘 test-auth.ts
+│   │   ├── 📘 test-chat-auth.ts
+│   │   ├── 📘 test-chat.ts
+│   │   ├── 📘 test-llm-providers.ts
+│   │   └── 📘 test-middleware.ts
+│   │   ├── 🔌 services/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 alert_service.py
+│   │   ├── 🐍 analytics.py
+│   │   ├── 🐍 auth_service.py
+│   │   ├── 📘 BackupService.ts
+│   │   ├── 🐍 cache_service.py
+│   │   ├── 🐍 calendar_service.py
+│   │   ├── 🐍 chat_service.py
+│   │   ├── 🐍 cost_monitoring.py
+│   │   ├── 🐍 document_chunker.py
+│   │   ├── 🐍 email_service.py
+│   │   ├── 🐍 embedding_service.py
+│   │   ├── 🐍 llm_service.py
+│   │   ├── 🐍 logging_service.py
+│   │   ├── 🐍 message_service.py
+│   │   ├── 🐍 metrics_service.py
+│   │   ├── 🐍 monitoring_service.py
+│   │   ├── 🐍 qdrant_service.py
+│   │   ├── 🐍 quota_service.py
+│   │   ├── 🐍 rag_service.py
+│   │   ├── 📘 SecurityService.ts
+│   │   ├── 🐍 user_service.py
+│   │   └── 📘 WorkflowService.ts
+│   │   ├── 📁 styles/
+│   │       ├── 📁 lovable/
+│   │   ├── 🧪 tests/
+│   │   │   ├── 📁 integration/
+│   │   │   ├── 🐍 test_api.py
+│   │   │   ├── 🐍 test_rag_integration.py
+│   │   │   └── 🐍 test_workflow.py
+│   │   │   ├── 📁 unit/
+│   │   │   ├── 🐍 test_agents.py
+│   │   │   └── 🐍 test_services.py
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 conftest.py
+│   │   ├── 📘 example.test.ts
+│   │   ├── 📘 jest.env.ts
+│   │   ├── 📘 jest.setup.ts
+│   │   ├── 📘 middleware.test.ts
+│   │   ├── 📘 setup.ts
+│   │   ├── 🐍 test_api.py
+│   │   ├── 🐍 test_chat_service.py
+│   │   ├── 🐍 test_connection.py
+│   │   ├── 🐍 test_integration.py
+│   │   ├── 🐍 test_message_service.py
+│   │   ├── 🐍 test_qdrant_connection.py
+│   │   └── 🐍 test_rag_service.py
+│   │   ├── 📁 tools/
+│   │   ├── 🐍 docs_generator.py
+│   │   ├── 🐍 index_docs.py
+│   │   └── 🐍 index_project_docs.py
+│   │   ├── 📁 types/
+│   │   ├── 📘 chat.ts
+│   │   ├── 📘 clerk.d.ts
+│   │   ├── 📘 global.d.ts
+│   │   ├── 📘 index.ts
+│   │   ├── 📘 jsx.d.ts
+│   │   ├── 📘 posthog-js.d.ts
+│   │   ├── 📘 services.d.ts
+│   │   ├── 📘 supabase.ts
+│   │   └── 📘 workflow.ts
+│   │   ├── 🛠️ utils/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 cache.py
+│   │   ├── 🐍 code_analyzer.py
+│   │   ├── 🐍 datetime_helper.py
+│   │   ├── 🐍 github_client.py
+│   │   ├── 🐍 helpers.py
+│   │   ├── 🐍 logger.py
+│   │   ├── 🐍 nlp_extractor.py
+│   │   ├── 🐍 rate_limiter.py
+│   │   ├── 🐍 repo_reporter.py
+│   │   ├── 🐍 resilience.py
+│   │   ├── 🐍 retry.py
+│   │   └── 🐍 validators.py
+│   │   ├── 📁 workflows/
+│   │   ├── 🐍 basic.py
+│   │   └── 🐍 tech_analysis.py
+│   ├── 🐍 __init__.py
+│   ├── 🐍 config.py
+│   ├── 🐍 database.py
+│   ├── 🐍 dependencies.py
+│   ├── 🐍 main.py
+│   ├── 📘 middleware.ts
+│   ├── 🐍 run.py
+│   ├── 🐍 test_cli.py
+│   ├── 🐍 test_config.py
+│   └── 🐍 test_rag.py
+│   ├── 📁 supabase/
+│   ├── 📁 templates/
+│       ├── 📁 reports/
+│       └── 📄 daily_report.html
+│   ├── 📁 terraform/
+│   └── 📄 main.tf
+│   ├── 🧪 tests/
+│   │   ├── 📁 agents/
+│   │   │   ├── 📁 tech_stack_expert/
+│   │   │   └── 🐍 test_agent.py
+│   │   │   ├── 📁 web_researcher/
+│   │   │   └── 🐍 test_agent.py
+│   │   ├── 🐍 __init__.py
+│   │   └── 🐍 test_github_assistant.py
+│   │   ├── 📁 analytics/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 send_more_events.py
+│   │   ├── 🐍 test_analytics.py
+│   │   ├── 🐍 test_events.py
+│   │   ├── 🐍 test_exporters.py
+│   │   ├── 🐍 test_llm_metrics.py
+│   │   ├── 🐍 test_property_definition.py
+│   │   ├── 🐍 test_reports.py
+│   │   ├── 🐍 test_response_time.py
+│   │   ├── 🐍 test_timing.py
+│   │   └── 🐍 test_visualizations.py
+│   │   ├── 📁 e2e/
+│   │   ├── 📘 api.e2e.ts
+│   │   ├── 📘 auth.e2e.ts
+│   │   ├── 📘 dashboard.e2e.ts
+│   │   ├── 📘 global-setup.ts
+│   │   ├── 📘 global-teardown.ts
+│   │   ├── 📘 profile.e2e.ts
+│   │   ├── 📘 settings.e2e.ts
+│   │   ├── 📘 smoke.e2e.ts
+│   │   └── 📘 test-utils.ts
+│   │   ├── 🛠️ utils/
+│   │   ├── 🐍 __init__.py
+│   │   └── 🐍 test_nlp_extractor.py
+│   ├── 🐍 __init__.py
+│   ├── 🐍 test_posthog_setup.py
+│   ├── 🐍 test_qdrant.py
+│   └── 🐍 test_rag_system.py
+│   ├── 📁 visualizations/
+├── ⚙️ docker-compose.monitoring.yml
+├── 📄 Dockerfile
+├── 🐍 gen1536.py
+├── 📄 jest.config.js
+├── 📄 next.config.js
+├── 📋 package.json
+├── 📘 playwright.config.ts
+├── 📄 postcss.config.js
+├── 📄 project_structure.txt
+├── 📄 pyproject.toml
+├── 📄 pytest.ini
+├── 📝 README.md
+├── 📄 requirements.txt
+├── 🐍 run_api.py
+├── 🐍 setup.py
+├── 🐍 showtree.py
+├── 📄 tailwind.config.js
+├── 🐍 test_qdrant.py
+├── 🐍 test_qdrant_collection.py
+└── 📋 tsconfig.json

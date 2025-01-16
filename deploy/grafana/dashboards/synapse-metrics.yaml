@@ -1,0 +1,36 @@
+apiVersion: 1
+
+providers:
+  - name: 'Synapse Metrics'
+    orgId: 1
+    folder: 'Synapse'
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
+
+dashboards:
+  - name: 'Synapse Overview'
+    uid: synapse-overview
+    panels:
+      - title: 'LLM Performance'
+        type: graph
+        gridPos: {x: 0, y: 0, w: 12, h: 8}
+        targets:
+          - expr: 'rate(llm_response_time_seconds_sum[5m]) / rate(llm_response_time_seconds_count[5m])'
+            legendFormat: 'Avg Response Time'
+      
+      - title: 'Cache Efficiency'
+        type: gauge
+        gridPos: {x: 12, y: 0, w: 6, h: 8}
+        targets:
+          - expr: 'sum(rate(cache_hits_total[5m])) / sum(rate(cache_requests_total[5m]))'
+            legendFormat: 'Cache Hit Rate'
+      
+      - title: 'User Engagement'
+        type: timeseries
+        gridPos: {x: 0, y: 8, w: 18, h: 8}
+        targets:
+          - expr: 'sum(rate(user_messages_total[5m])) by (user_id)'
+            legendFormat: 'Messages per User' 

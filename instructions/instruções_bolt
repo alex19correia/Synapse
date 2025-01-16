@@ -1,0 +1,360 @@
+# 🚀 Bolt.diy - Instruções de Desenvolvimento
+
+## 📋 Visão Geral
+
+O Synapse é a minha primeira invenção. Chamo-me Alexandre Correia, tenho 23 anos, sou natural do Porto, Portugal e desenvolvi uma paixão pela IA. O meu primeiro projeto, quero que seja o meu último. Ou seja, Eu quero que este projeto cresça comigo e vá melhorando a medida que eu vou melhorando. A minha ideia é colocar-me à frente de 99% do mercado competitivo, ganhar liberdade financeira o mais rápido possível e tornar-me o que eu acho que todo o humano nasce para ser: um poeta. Um humano nasce para criar e não para passar a vida a trabalhar para outros. A minha ideia foi criar um agente, ligá-lo a uma LLM (que está constantemente a evoluir e portanto o agente tambem), dar-lhe muita infromação minha, fazê-lo não se esquecer de nada e fazê-lo evoluir comigo. 
+
+O Synapse Assistant é meu assistente pessoal de IA vitalício, projetado para ser uma extensão da minha mente e memória. Como o J.A.R.V.I.S. do Iron Man, ele evoluirá comigo ao longo das décadas, adaptando-se a novas tecnologias e necessidades. 
+
+## 🎯 Visão do Bolt.diy
+
+O Bolt.diy é a ferramenta que escolhi para dar vida ao Synapse. É um ambiente de desenvolvimento revolucionário que combina:
+
+1. **Desenvolvimento Ágil**: Ambiente completo no browser
+2. **IA Nativa**: Integração profunda com múltiplos LLMs
+3. **Memória Persistente**: Sistema de versionamento e histórico
+4. **Evolução Contínua**: Adaptação a novas tecnologias
+
+```python
+synapse_vision = {
+    "objetivo": "Assistente pessoal vitalício",
+    "evolução": "Crescimento contínuo com o desenvolvedor",
+    "capacidades": {
+        "memória": "Persistente e evolutiva",
+        "aprendizado": "Adaptativo e contextual",
+        "assistência": "Proativa e personalizada"
+    },
+    "tecnologias": {
+        "base": "Bolt.diy + Multi-LLM",
+        "armazenamento": "Vector DB + Redis",
+        "processamento": "FastAPI + Next.js",
+        "automação": "N8N + Custom Workflows"
+    }
+}
+```
+
+## 🛠️ Stack Técnica
+
+### 1. Core Stack
+```python
+tech_stack = {
+    "frontend": {
+        "framework": "Next.js 14",
+        "ui": {
+            "base": "Tailwind CSS",
+            "components": "Shadcn/UI",
+            "animations": "Framer Motion"
+        },
+        "state": {
+            "local": "Zustand",
+            "server": "React Query"
+        }
+    },
+    "backend": {
+        "api": "FastAPI",
+        "database": "Supabase",
+        "cache": "Upstash Redis",
+        "search": "Qdrant Vector DB"
+    },
+    "ai": {
+        "primary": "GPT-4-Turbo",
+        "backup": "Claude-3",
+        "local": "Ollama (CodeLlama)",
+        "embeddings": "Ada 002"
+    },
+    "devops": {
+        "container": "Docker",
+        "ci_cd": "GitHub Actions",
+        "monitoring": "Langfuse"
+    }
+}
+```
+
+### 2. Arquitetura do Sistema
+
+```python
+system_architecture = {
+    "componentes": {
+        "bolt_ide": {
+            "editor": "Monaco Editor",
+            "terminal": "Xterm.js",
+            "git": "Isomorphic Git"
+        },
+        "ai_engine": {
+            "router": "LLM Router",
+            "memory": "Hierarchical Memory",
+            "context": "RAG System"
+        },
+        "data_layer": {
+            "storage": "Hybrid Storage",
+            "cache": "Multi-level Cache",
+            "search": "Vector Search"
+        }
+    },
+    "integrações": {
+        "auth": "Clerk",
+        "analytics": "PostHog",
+        "logs": "Axiom"
+    }
+}
+```
+
+## 📦 Setup do Ambiente
+
+### 1. Requisitos Base
+```bash
+# Verificar requisitos
+node -v  # >= 18.0.0
+python -v # >= 3.10
+docker -v # >= 24.0.0
+
+# Instalar ferramentas globais
+npm install -g pnpm typescript @antfu/ni
+pip install poetry
+```
+
+### 2. Configuração do Projeto
+```bash
+# Clonar repositório
+git clone https://github.com/alexandrec0sta/synapse
+cd synapse
+
+# Setup do ambiente
+pnpm install  # Frontend deps
+poetry install  # Backend deps
+
+# Configurar ambiente local
+cp .env.example .env.local
+```
+
+### 3. Serviços Locais
+```yaml
+# docker-compose.yml
+services:
+  supabase:
+    image: supabase/postgres
+    ports: ["5432:5432"]
+    
+  redis:
+    image: redis:alpine
+    ports: ["6379:6379"]
+    
+  qdrant:
+    image: qdrant/qdrant
+    ports: ["6333:6333"]
+    
+  ollama:
+    image: ollama/ollama
+    ports: ["11434:11434"]
+```
+
+## 🧠 Sistema de IA
+
+### 1. Configuração LLM
+```python
+llm_setup = {
+    "providers": {
+        "openai": {
+            "model": "gpt-4-turbo-preview",
+            "api_key": "${OPENAI_API_KEY}",
+            "max_tokens": 4096
+        },
+        "anthropic": {
+            "model": "claude-3-opus",
+            "api_key": "${ANTHROPIC_API_KEY}",
+            "max_tokens": 4096
+        },
+        "ollama": {
+            "model": "codellama",
+            "host": "http://localhost:11434",
+            "context_window": 8192
+        }
+    },
+    "router": {
+        "strategy": "cost_effective",
+        "fallback": True,
+        "cache": True
+    }
+}
+```
+
+### 2. Sistema de Memória
+```python
+memory_system = {
+    "types": {
+        "short_term": "Redis Cache",
+        "long_term": "Vector Store",
+        "episodic": "Supabase"
+    },
+    "embeddings": {
+        "model": "text-embedding-3-small",
+        "dimensions": 1536,
+        "batch_size": 100
+    },
+    "retrieval": {
+        "strategy": "hybrid",
+        "k_neighbors": 5,
+        "threshold": 0.8
+    }
+}
+```
+
+## 🔄 Workflow de Desenvolvimento
+
+### 1. Setup Inicial
+```bash
+# Iniciar serviços
+docker compose up -d
+
+# Verificar status
+docker compose ps
+
+# Preparar banco de dados
+pnpm db:push
+
+# Iniciar desenvolvimento
+pnpm dev  # Frontend
+pnpm api  # Backend
+```
+
+### 2. Comandos Úteis
+```bash
+# Desenvolvimento
+pnpm dev        # Iniciar Next.js
+pnpm api        # Iniciar FastAPI
+pnpm studio     # Supabase Studio
+
+# Qualidade
+pnpm lint       # ESLint
+pnpm format     # Prettier
+pnpm test       # Jest + Playwright
+
+# Build & Deploy
+pnpm build      # Build produção
+pnpm deploy     # Deploy Vercel
+```
+
+## 📚 Estrutura de Arquivos
+
+```
+synapse/
+├── src/
+│   ├── app/           # Next.js routes
+│   ├── components/    # React components
+│   ├── lib/          # Utilities
+│   └── styles/       # Global styles
+├── api/
+│   ├── app/          # FastAPI app
+│   ├── models/       # Pydantic models
+│   └── services/     # Business logic
+├── memory/
+│   ├── embeddings.py # Vector embeddings
+│   ├── cache.py     # Redis cache
+│   └── store.py     # Vector store
+├── scripts/
+│   ├── setup.ts     # Setup script
+│   └── deploy.ts    # Deploy script
+└── docs/
+    ├── architecture/ # Arquitetura
+    ├── api/         # API docs
+    └── setup/       # Setup guides
+```
+
+## 🔒 Segurança & Compliance
+
+### 1. Autenticação
+```python
+auth_config = {
+    "provider": "Clerk",
+    "methods": ["email", "github"],
+    "mfa": True,
+    "session": {
+        "duration": "7d",
+        "renewal": True
+    }
+}
+```
+
+### 2. Proteção de Dados
+```python
+data_protection = {
+    "encryption": {
+        "at_rest": True,
+        "in_transit": True
+    },
+    "backup": {
+        "frequency": "daily",
+        "retention": "30d"
+    },
+    "compliance": {
+        "gdpr": True,
+        "ccpa": True
+    }
+}
+```
+
+## 📈 Monitoramento
+
+### 1. Métricas
+```python
+monitoring = {
+    "performance": [
+        "Response Time",
+        "Error Rate",
+        "Resource Usage"
+    ],
+    "ai": [
+        "Token Usage",
+        "Model Performance",
+        "Cache Hit Rate"
+    ],
+    "user": [
+        "Session Duration",
+        "Feature Usage",
+        "Satisfaction Score"
+    ]
+}
+```
+
+### 2. Logging
+```python
+logging_setup = {
+    "providers": {
+        "dev": "Console",
+        "prod": "Axiom"
+    },
+    "levels": [
+        "DEBUG",
+        "INFO",
+        "WARN",
+        "ERROR"
+    ],
+    "context": {
+        "user_id": True,
+        "session_id": True,
+        "trace_id": True
+    }
+}
+```
+
+## 🎯 Próximos Passos
+
+1. **Fase 1: Setup Base**
+   - [ ] Configurar ambiente local
+   - [ ] Integrar autenticação
+   - [ ] Setup banco de dados
+
+2. **Fase 2: Core Features**
+   - [ ] Sistema de chat
+   - [ ] Memória persistente
+   - [ ] Integração LLM
+
+3. **Fase 3: Otimização**
+   - [ ] Performance tuning
+   - [ ] Segurança
+   - [ ] Monitoramento
+
+4. **Fase 4: Evolução**
+   - [ ] Novos modelos
+   - [ ] Features avançadas
+   - [ ] Automações

@@ -1,0 +1,14 @@
+{
+  "start_time": "2025-01-14T21:04:07.302100",
+  "tests": {
+    "load_test": {
+      "status": "completed",
+      "total_requests": 100,
+      "total_failures": 100,
+      "average_response_time": 4084.054805000161,
+      "requests_per_second": 1.2
+    }
+  },
+  "end_time": "2025-01-14T21:08:46.514579",
+  "duration_seconds": 279.212479
+}

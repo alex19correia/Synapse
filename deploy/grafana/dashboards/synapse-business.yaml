@@ -1,0 +1,29 @@
+apiVersion: 1
+
+dashboards:
+  - name: 'Synapse Business Metrics'
+    uid: synapse-business
+    panels:
+      # User Engagement Dashboard
+      - title: 'User Retention'
+        type: heatmap
+        gridPos: {x: 0, y: 0, w: 12, h: 8}
+        targets:
+          - expr: 'user_retention_days'
+            legendFormat: 'Retention Days'
+
+      # Cost Analysis Dashboard
+      - title: 'Token Usage by Model'
+        type: piechart
+        gridPos: {x: 12, y: 0, w: 12, h: 8}
+        targets:
+          - expr: 'sum(llm_token_usage_total) by (model)'
+            legendFormat: '{{model}}'
+
+      # Feature Usage Dashboard
+      - title: 'Feature Adoption'
+        type: bargauge
+        gridPos: {x: 0, y: 8, w: 24, h: 6}
+        targets:
+          - expr: 'feature_usage_count'
+            legendFormat: '{{feature}}' 

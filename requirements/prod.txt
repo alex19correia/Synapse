@@ -1,0 +1,9 @@
+# Importar dependências base
+-r base.txt
+
+# Servidor
+uvicorn>=0.24.0
+gunicorn>=21.2.0
+
+# Monitorização
+sentry-sdk>=1.35.0 

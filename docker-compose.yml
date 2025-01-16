@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  bolt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_LOG_LEVEL=debug
+    networks:
+      - bolt_network
+    restart: unless-stopped
+
+networks:
+  bolt_network:
+    driver: bridge 

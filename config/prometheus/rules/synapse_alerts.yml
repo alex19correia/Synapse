@@ -1,0 +1,87 @@
+groups:
+  - name: synapse_alerts
+    rules:
+      # API Performance Alerts
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="synapse-api"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High API latency detected"
+          description: "95th percentile latency is above 2 seconds for 5 minutes"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{job="synapse-api",status=~"5.."}[5m]) / rate(http_requests_total{job="synapse-api"}[5m]) * 100 > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High API error rate detected"
+          description: "Error rate is above 5% for 5 minutes"
+
+      # RAG Performance Alerts
+      - alert: LowCacheHitRate
+        expr: rate(rag_cache_hits_total[10m]) / (rate(rag_cache_hits_total[10m]) + rate(rag_cache_misses_total[10m])) * 100 < 30
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low cache hit rate"
+          description: "Cache hit rate is below 30% for 10 minutes"
+
+      - alert: HighQueryLatency
+        expr: histogram_quantile(0.95, rate(rag_query_duration_seconds_bucket[5m])) > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High RAG query latency"
+          description: "95th percentile RAG query time is above 5 seconds for 5 minutes"
+
+      - alert: LowSimilarityScores
+        expr: avg_over_time(rag_similarity_scores[10m]) < 0.5
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low similarity scores"
+          description: "Average similarity score is below 0.5 for 10 minutes"
+
+      # Redis Health Alerts
+      - alert: RedisHighMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Redis high memory usage"
+          description: "Redis memory usage is above 80% for 5 minutes"
+
+      - alert: RedisHighKeyEvictionRate
+        expr: rate(redis_evicted_keys_total[5m]) > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High Redis key eviction rate"
+          description: "Redis is evicting more than 100 keys per second for 5 minutes"
+
+      # System Health Alerts
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage"
+          description: "CPU usage is above 80% for 5 minutes"
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage"
+          description: "Memory usage is above 80% for 5 minutes" 
