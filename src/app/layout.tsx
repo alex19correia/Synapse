@@ -1,11 +1,13 @@
-/** @generated-by-lovable - DO NOT EDIT */
 import { Metadata } from 'next'
-import { Providers } from './providers'
+import { ClerkProvider } from '@clerk/nextjs'
+import { Inter } from 'next/font/google'
 import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Synapse Assistant',
-  description: 'Your personal AI assistant',
+  description: 'Your personal AI assistant powered by advanced LLMs',
 }
 
 export default function RootLayout({
@@ -14,13 +16,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt">
-      <body>
-        <Providers>
+    <html lang="pt" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ClerkProvider>
           {children}
-        </Providers>
+        </ClerkProvider>
       </body>
     </html>
   )
-}
-/** @end-lovable */ 
+} 
