@@ -1,0 +1,141 @@
+
+### Working with Multiple Workstations - Considerations
+
+1. **Git vs OneDrive Sync**
+- While OneDrive can sync files, it's not ideal for development projects because:
+  - It may cause conflicts with build files and dependencies
+  - It doesn't handle version control like Git
+  - It might sync node_modules or other large directories unnecessarily
+
+2. **Recommended Setup**
+Instead of using OneDrive directly, I recommend:
+
+```bash
+# 1. Use Git as your primary version control
+git clone https://github.com/your-username/synapse.git
+
+# 2. Create a .gitignore to prevent syncing unnecessary files
+node_modules/
+.next/
+__pycache__/
+.env
+.env.local
+dist/
+build/
+*.pyc
+```
+
+3. **Environment Setup for Multiple Workstations**
+```bash
+# Create a .env.example file (to be committed)
+cp .env .env.example
+# Remove sensitive data from .env.example but keep the structure
+
+# On each workstation:
+cp .env.example .env
+# Then fill in the appropriate values for that environment
+```
+
+4. **Docker Considerations**
+```yaml
+# docker-compose.override.yml for each workstation
+version: '3.8'
+services:
+  api:
+    ports:
+      - "${API_PORT:-8000}:8000"
+  redis:
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+```
+
+### Best Practices for Multi-Workstation Development
+
+1. **Version Control**
+```bash
+# Before starting work on any machine
+git pull origin main
+
+# When switching workstations
+git commit -m "feat: work in progress"
+git push
+
+# On the other workstation
+git pull
+```
+
+2. **Environment Management**
+```bash
+# Create a setup script (setup.sh)
+#!/bin/bash
+# Install dependencies
+npm install
+pip install -r requirements.txt
+
+# Copy environment file if it doesn't exist
+[ ! -f .env ] && cp .env.example .env
+
+# Setup local development certificates if needed
+mkdir -p .cert
+```
+
+3. **Workspace Configuration**
+```json
+// .vscode/settings.json
+{
+  "editor.formatOnSave": true,
+  "python.linting.enabled": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
+### Recommendations
+
+1. **Don't Use OneDrive for Active Development**
+- Keep your project in a regular directory outside OneDrive
+- Use Git for version control
+- Use GitHub/GitLab for remote repository hosting
+
+2. **Do Use OneDrive for**
+- Documentation backups
+- Design assets
+- Environment variable templates
+- Personal notes about the project
+
+3. **Setup Checklist for Each Workstation**
+```bash
+# 1. Clone the repository
+git clone https://github.com/alex19correia/synapse.git
+
+# 2. Setup environment
+cp .env.example .env
+# Edit .env with workstation-specific values
+
+# 3. Install dependencies
+npm install
+pip install -r requirements.txt
+
+# 4. Setup Docker
+docker-compose up -d
+
+# 5. Verify setup
+npm run test:e2e:smoke
+```
+
+4. **Synchronization Protocol**
+```bash
+# Start of work session
+git pull
+npm install # if package.json changed
+pip install -r requirements.txt # if requirements.txt changed
+
+# End of work session
+git add .
+git commit -m "feat: describe your changes"
+git push
+```
+
+This approach will give you a more reliable and maintainable development workflow across multiple workstations compared to relying on OneDrive synchronization.

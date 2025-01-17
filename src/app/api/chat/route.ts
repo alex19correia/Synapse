@@ -1,55 +1,61 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs';
-import { supabase } from '../../../lib/supabase';
-import type { ChatSession, NewChatSession } from '../../../types/supabase';
+import { ChatService } from '@/services/chat_service';
+import { env } from '@/env';
 
-export async function GET() {
-  const { userId } = auth();
+// Initialize chat service as a singleton
+const chatService = new ChatService(
+    env.SUPABASE_URL,
+    env.SUPABASE_KEY,
+    60  // Persist every 60 seconds
+);
 
-  if (!userId) {
-    return new NextResponse('Unauthorized', { status: 401 });
-  }
+export async function GET(req: Request) {
+    const { userId } = auth();
+    if (!userId) {
+        return new NextResponse('Unauthorized', { status: 401 });
+    }
 
-  try {
-    const { data: sessions, error } = await supabase
-      .from('chat_sessions')
-      .select()
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
-
-    if (error) throw error;
-
-    return NextResponse.json(sessions);
-  } catch (error) {
-    console.error('Error fetching sessions:', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
+    try {
+        const { searchParams } = new URL(req.url);
+        const statusParam = searchParams.get('status');
+        const status = statusParam === 'archived' ? 'archived' : 'active';
+        
+        const sessions = await chatService.getSessions(userId, status);
+        return NextResponse.json(sessions);
+    } catch (error) {
+        console.error('Error fetching sessions:', error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
 }
 
 export async function POST(req: Request) {
-  const { userId } = auth();
-  if (!userId) {
-    return new NextResponse('Unauthorized', { status: 401 });
-  }
+    const { userId } = auth();
+    if (!userId) {
+        return new NextResponse('Unauthorized', { status: 401 });
+    }
 
-  try {
-    const { title } = await req.json() as { title: string };
+    try {
+        const { title, metadata } = await req.json();
+        
+        const session = await chatService.createSession(
+            userId,
+            title || 'Nova Conversa',
+            metadata
+        );
+        
+        return NextResponse.json(session);
+    } catch (error) {
+        console.error('Error creating session:', error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
+}
 
-    const { data: session, error } = await supabase
-      .from('chat_sessions')
-      .insert({
-        title,
-        user_id: userId,
-        created_at: new Date().toISOString()
-      } satisfies NewChatSession)
-      .select()
-      .single();
+// Ensure data is persisted when the server shuts down
+process.on('SIGTERM', async () => {
+    await chatService.flush();
+});
 
-    if (error) throw error;
-
-    return NextResponse.json(session);
-  } catch (error) {
-    console.error('Error creating session:', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
-} 
+process.on('SIGINT', async () => {
+    await chatService.flush();
+}); 

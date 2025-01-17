@@ -1,146 +1,136 @@
-# Synapse Assistant 🤖
+# Synapse Assistant
 
-## Visão Geral
+## Prerequisites
 
-O Synapse Assistant é um sistema avançado de assistente virtual que utiliza LLMs (Large Language Models) para fornecer respostas precisas e contextualizadas, com capacidade de aprendizado contínuo através de RAG (Retrieval-Augmented Generation).
+Before you begin, ensure you have the following installed:
+- Git
+- Python (Latest stable)
+- Node.js (LTS version)
+- Docker Desktop
+- VS Code + Cursor
+- PowerShell 5.1 or later
 
-## Documentação
+## Quick Start (New PC Setup)
 
-### Core Systems
-- [Sistema LLM](docs/llm/README.md) - Processamento de linguagem natural e geração de texto
-- [Sistema de Analytics & Metrics](docs/analytics/README.md) - Coleta e análise de métricas
-- [Sistema de API](docs/api/README.md) - Interface RESTful para todos os componentes
-- [Sistema de Infraestrutura](docs/infrastructure/README.md) - Gerenciamento de infraestrutura e deployment
-- [Sistema de Testes](docs/testing/README.md) - Testes unitários, integração e end-to-end
+1. **Clone the Repository**
+   ```powershell
+   git clone https://github.com/alex19correia/synapse.git
+   cd synapse
+   ```
 
-### Support Systems
-- [Sistema de Agentes](docs/agents/README.md) - Agentes inteligentes especializados
-- [Sistema RAG](docs/rag/README.md) - Recuperação e geração aumentada
-- [Sistema de Crawlers](docs/crawlers/README.md) - Coleta e indexação de conteúdo web
+2. **Run Setup Script**
+   ```powershell
+   # This will install all necessary tools and dependencies
+   ./scripts/setup.ps1
+   ```
 
-## Instalação
+3. **Environment Setup**
+   ```powershell
+   # Copy example environment file
+   cp .env.example .env
+   
+   # Edit .env with your values
+   code .env
+   ```
 
-```bash
-# Clone o repositório
-git clone https://github.com/yourusername/synapse.git
+4. **Start Development Environment**
+   ```powershell
+   # Start all services with Docker
+   docker-compose up -d
+   
+   # Start development servers
+   pnpm dev
+   ```
 
-# Entre no diretório
-cd synapse
+## Project Structure
 
-# Instale as dependências
-pip install -r requirements.txt
-
-# Configure as variáveis de ambiente
-cp .env.example .env
+```
+synapse/
+├── apps/                      # Application code
+│   ├── web/                  # Next.js frontend
+│   │   └── src/
+│   │       ├── app/         # Next.js 14 app router
+│   │       ├── components/  # React components
+│   │       └── lib/        # Frontend utilities
+│   └── api/                 # FastAPI backend
+│       └── src/
+│           ├── routes/     # API endpoints
+│           └── services/   # Business services
+├── packages/                 # Shared packages
+│   ├── core/               # Core business logic
+│   │   └── src/
+│   │       ├── llm/       # LLM integration
+│   │       └── rag/       # RAG system
+│   └── utils/             # Shared utilities
+└── docs/                    # Documentation
 ```
 
-## Uso
+## Development Workflow
 
-```python
-from synapse import SynapseAssistant
+1. **Start Development Environment**
+   ```bash
+   # Start all services
+   pnpm dev
+   ```
 
-# Inicialize o assistente
-assistant = SynapseAssistant()
+2. **Access Services**
+   - Frontend: http://localhost:3000
+   - API: http://localhost:8000
+   - API Docs: http://localhost:8000/docs
+   - Supabase: http://localhost:54323
 
-# Faça uma pergunta
-response = await assistant.ask("Como posso ajudar?")
+3. **Run Tests**
+   ```bash
+   # Run all tests
+   pnpm test
+   
+   # Run specific workspace tests
+   pnpm --filter @synapse/web test
+   pnpm --filter @synapse/api test
+   ```
 
-# Use RAG para buscar informações
-results = await assistant.search("Documentação sobre LLMs")
+## Common Issues & Solutions
 
-# Processe um documento
-doc_id = await assistant.process_document("path/to/document.pdf")
-```
+### Docker Issues
+1. **Services Won't Start**
+   - Ensure Docker Desktop is running
+   - Try `docker-compose down -v` then `docker-compose up -d`
 
-## Desenvolvimento
+### Python Issues
+1. **Missing Dependencies**
+   ```bash
+   # Recreate virtual environment
+   rm -rf .venv
+   python -m venv .venv
+   .\.venv\Scripts\activate
+   pip install -r apps/api/requirements.txt
+   ```
 
-### Setup do Ambiente
+### Node.js Issues
+1. **Dependency Conflicts**
+   ```bash
+   # Clean install
+   pnpm clean
+   pnpm install
+   ```
 
-```bash
-# Crie um ambiente virtual
-python -m venv venv
+## Contributing
 
-# Ative o ambiente
-source venv/bin/activate  # Linux/Mac
-.\venv\Scripts\activate   # Windows
+1. Create a new branch
+   ```bash
+   git checkout -b feature/your-feature
+   ```
 
-# Instale as dependências de desenvolvimento
-pip install -r requirements-dev.txt
-```
+2. Make your changes following our conventions
+   - Use TypeScript strict mode
+   - Follow ESLint rules
+   - Write tests for new features
 
-### Testes
+3. Submit a pull request
+   - Ensure all tests pass
+   - Update documentation if needed
+   - Request review from team members
 
-```bash
-# Execute todos os testes
-pytest
+## License
 
-# Execute testes específicos
-pytest tests/llm/
-pytest tests/api/
-pytest tests/integration/
-```
-
-### Linting e Formatação
-
-```bash
-# Execute o linter
-flake8 src tests
-
-# Formate o código
-black src tests
-isort src tests
-```
-
-## Deployment
-
-### Local
-
-```bash
-# Inicie os serviços
-docker-compose up -d
-
-# Verifique o status
-docker-compose ps
-
-# Visualize os logs
-docker-compose logs -f
-```
-
-### Produção
-
-```bash
-# Build da imagem
-docker build -t synapse:latest .
-
-# Deploy no Kubernetes
-kubectl apply -f k8s/
-```
-
-## Monitoramento
-
-### Métricas
-
-- Prometheus: http://localhost:9090
-- Grafana: http://localhost:3000
-
-### Logs
-
-- Kibana: http://localhost:5601
-
-## Contribuição
-
-1. Fork o repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/amazing-feature`)
-3. Commit suas mudanças (`git commit -m 'Add amazing feature'`)
-4. Push para a branch (`git push origin feature/amazing-feature`)
-5. Abra um Pull Request
-
-## Licença
-
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## Contato
-
-Alexandre Correia - [@yourusername](https://twitter.com/yourusername) - email@example.com
-
-Project Link: [https://github.com/yourusername/synapse](https://github.com/yourusername/synapse)
+This project is private and confidential. All rights reserved.

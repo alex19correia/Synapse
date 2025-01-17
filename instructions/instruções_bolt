@@ -349,7 +349,7 @@ Remember to use Bolt.diy's enhance prompt feature before submitting each major c
 
 1. **Initial Repository Setup**
 ```bash
-git clone https://github.com/alexandrec0sta/synapse.git
+git clone https://github.com/alex19correia/Synapse_Bolt.git
 cd synapse
 ```
 

@@ -1,42 +1,69 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs';
-import { supabase } from '../../../../../lib/supabase';
+import { ChatService } from '@/services/chat_service';
+import { env } from '@/env';
 
-export const dynamic = 'force-dynamic';
+// Use the same singleton instance
+const chatService = new ChatService(
+    env.SUPABASE_URL,
+    env.SUPABASE_KEY,
+    60
+);
 
-export async function DELETE(request: NextRequest) {
-  const { userId } = auth();
-
-  if (!userId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  try {
-    const sessionId = request.nextUrl.pathname.split('/')[4];
-
-    // Verifica se a sessão existe e pertence ao usuário
-    const { data: session, error: fetchError } = await supabase
-      .from('chat_sessions')
-      .select()
-      .eq('id', sessionId)
-      .eq('user_id', userId)
-      .single();
-
-    if (fetchError || !session) {
-      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
+export async function PATCH(
+    req: Request,
+    { params }: { params: { sessionId: string } }
+) {
+    const { userId } = auth();
+    if (!userId) {
+        return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    // Deleta a sessão
-    const { error: deleteError } = await supabase
-      .from('chat_sessions')
-      .delete()
-      .eq('id', sessionId);
+    try {
+        const { status, metadata } = await req.json();
+        
+        if (!status || !['active', 'archived'].includes(status)) {
+            return new NextResponse('Invalid status', { status: 400 });
+        }
+        
+        const session = await chatService.updateSessionStatus(
+            params.sessionId,
+            status as 'active' | 'archived',
+            metadata
+        );
+        
+        return NextResponse.json(session);
+    } catch (error) {
+        console.error('Error updating session:', error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
+}
 
-    if (deleteError) throw deleteError;
+export async function DELETE(
+    req: Request,
+    { params }: { params: { sessionId: string } }
+) {
+    const { userId } = auth();
+    if (!userId) {
+        return new NextResponse('Unauthorized', { status: 401 });
+    }
 
-    return NextResponse.json(null, { status: 204 });
-  } catch (error) {
-    console.error('Error deleting session:', error);
-    return NextResponse.json({ error: 'Internal Error' }, { status: 500 });
-  }
+    try {
+        const { searchParams } = new URL(req.url);
+        const hardDelete = searchParams.get('hard') === 'true';
+        
+        if (hardDelete) {
+            const success = await chatService.deleteSession(params.sessionId);
+            if (!success) {
+                return new NextResponse('Session not found', { status: 404 });
+            }
+        } else {
+            await chatService.archiveSession(params.sessionId);
+        }
+        
+        return new NextResponse(null, { status: 204 });
+    } catch (error) {
+        console.error('Error deleting session:', error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
 } 
