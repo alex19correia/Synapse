@@ -8,7 +8,7 @@ async def test_redis_connection():
         # Inicializa o cliente Redis
         redis = Redis(
             host="localhost",
-            port=6379,
+            port=6380,
             decode_responses=True
         )
         
